@@ -6,12 +6,20 @@ var ctx = canvas.getContext('2d');
 
 var answers = [
     {
-        question: "Cuál es el número de la policia?",
+        question: "¿Cuál es el número de emergencias en México?",
         answer : "911"
     },
     {
-        question: "Cuál es el número de los bomberos?",
-        answer: "060"
+        question: "¿Cuál es el órgano mas largo del cuerpo humano?",
+        answer: "la piel"
+    },
+    {
+        question: "¿Cuantas compresiones con insuflaciones se debe de dar en RCP?",
+        answer: "30x2"
+    },
+    {
+        question: "Cuando sufres una quemadura, hay que mantenerla húmeda, ¿verdadero o falso?",
+        answer: "verdadero"
     }
 ]
 
@@ -53,7 +61,7 @@ class Background{
         this.width = canvas.width
         this.height = canvas.height
         this.imagen = new Image()
-        this.imagen.src = './images/cdmx.jpg';
+        this.imagen.src = './images/cdmx2.jpg';
         this.puntos = 0;
         this.vidas = 3;
     }
@@ -62,9 +70,9 @@ class Background{
         // // Detenemos la ejecución del intervalo
         clearInterval(interval);
         // Definimos el tamaño y fuente de nuestro texto
-        ctx.font = "20px Avenir";
+        ctx.font = "20px Arial";
         // Dibujamos el texto en el canvas.
-        ctx.fillText("Ponte a estudiar estas chav@", 90, 80);
+        ctx.fillText("Game Over in your pacient", 90, 80);
     }
     
     draw(){
@@ -117,7 +125,7 @@ var interval = setInterval(function(){
     // Generamos enemigos
     generateEnemies();
     drawingEnemies();
-}, 1000/45)
+}, 1000/30)
 
 
 addEventListener('keydown', function(event){
@@ -133,7 +141,7 @@ addEventListener('keydown', function(event){
 var enemies = [];
 
 function generateEnemies() {
-    if(frames % 100 == 0 || frames % 60 == 0 || frames % 170 == 0){
+    if(frames % 300 == 0 || frames % 600 == 0 || frames % 170 == 0){
         // creamos una instancia de Enemy y la agregamos aun arreglo
         var enemy = new Enemy
         enemies.push(enemy);
@@ -147,7 +155,7 @@ function drawingEnemies(){
             enemies.splice(i, 1);
             //Ejecutamos el gameOver
             //fondo.gameOver();
-            let index = Math.floor(Math.random() * 2);
+            let index = Math.floor(Math.random() * 4);
             let res = prompt(answers[index].question);
             if(res === answers[index].answer){
                 fondo.puntos += 1;
